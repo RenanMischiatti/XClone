@@ -1,0 +1,63 @@
+#menu {
+    border-right: 1px solid #53647165;
+    height: 100%;
+    padding: 15px;
+}
+
+.user-icon-placeholder {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ffffff9a;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+}
+
+nav span {
+    margin-bottom: 16px;
+    font-size: 24px;
+}
+
+nav span a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ffffffda;
+    transition: 0.3s ease all;
+    border-radius: 16px;
+    justify-self: start;
+    padding: 4px 14px;
+}
+
+
+
+nav span#logo a:hover {
+    background-color: #000000;
+}
+
+nav span a:hover {
+    background-color: #303030;
+}
+
+
+
+nav span svg {
+    fill: white;
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+}
+
+#createPostBtn {
+    border-radius: 35px;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+  

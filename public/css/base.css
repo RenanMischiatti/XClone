@@ -1,0 +1,14 @@
+body {
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Montserrat';
+}
+
+.area {
+    border: 1px solid red;
+}
+
+.bold {
+    font-weight: bolder;
+}
