@@ -62,7 +62,7 @@ class LoginController extends Controller
     
         return redirect()->route('index')
             ->withErrors(['username' => 'The provided credentials are incorrect.'])
-            ->withInput('username');
+            ->withInput();
     }
     
     /**

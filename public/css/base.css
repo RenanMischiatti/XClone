@@ -12,3 +12,16 @@ body {
 .bold {
     font-weight: bolder;
 }
+
+.border-right-default {
+    border-right: 1px solid #53647165;
+}
+.border-left-default {
+    border-left: 1px solid #53647165;
+}
+.border-bottom-default {
+    border-bottom: 1px solid #53647165;
+}
+.border-top-default {
+    border-top: 1px solid #53647165;
+}

@@ -13,7 +13,8 @@
                 @csrf
                 <div class="input-group mb-3">
                     <label for="username">Username</label>
-                    <input type="text" name="username" id="username" placeholder="">
+                    <input type="text" name="username" id="username" placeholder="" value="{{ old('username') }}">
+                    
                 </div>
                 <div class="input-group mb-4">
                     <label for="password">Password</label>
