@@ -10,6 +10,10 @@
 .radio-inputs .radio {
     flex: 1 1 auto;
     text-align: center;
+    transition: 0.2s ease all;
+}
+.radio-inputs .radio:hover {
+    background-color: rgba(51, 51, 51, 0.253);    
 }
   
 .radio-inputs .radio input {
@@ -43,4 +47,20 @@
 
 #area-post {
     
+}
+
+#input-post {
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    resize: none;
+    background-color: transparent;
+    color: #ffffff;
+    overflow-y: hidden; 
+}
+
+#postBtn {
+    font-size: 14px;
 }

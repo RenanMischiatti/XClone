@@ -12,8 +12,10 @@
     </div>
 
     @auth
-        <section id="area-post" class="w-100 d-flex">
-            <div>
+        <section id="area-post" class="w-100 d-flex flex-column px-4 py-3">
+            <form action="{{route('post.store')}}" method="POST" class="d-flex align-items-start w-100">
+                @csrf
+            
                 @if(auth()->user()->icon)
                     <img src="{{ asset('storage/' . auth()->user()->icon) }}" alt="User Icon" class="icon-class">
                 @else 
@@ -21,10 +23,17 @@
                         {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                     </div>
                 @endif
-            </div>
-            <div>
+                <div class="w-100 p-2">
+                    <textarea class="" name="" placeholder="What's Happen?" id="input-post"  rows="2"></textarea>
+                    <hr>
 
-            </div>
+                    <div id="buttons" class="w-100 d-flex justify-content-end">
+                        <button disabled class="btn btn-primary px-5 py-2" id="postBtn">
+                            Post
+                        </button>
+                    </div>
+                </div>
+            </form>
 
         </section>
     @endauth
@@ -35,4 +44,8 @@
 
 @push('styles')
     <link href="{{asset('css/feed.css')}}" rel="stylesheet">
+@endpush
+
+@push('scripts')
+    <script src="{{asset('js/feed.js')}}"></script>
 @endpush
