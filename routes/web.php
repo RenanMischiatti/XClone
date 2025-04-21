@@ -23,3 +23,5 @@ Route::middleware('auth')->group(function () {
     
 
 });
+
+Route::get('/post/GetPosts', [FeedController::class, 'getPosts'])->name('post.getPost');

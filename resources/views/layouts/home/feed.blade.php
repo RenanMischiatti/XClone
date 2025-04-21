@@ -13,7 +13,7 @@
 
     @auth
         <section id="area-post" class="w-100 d-flex flex-column px-4 py-3">
-            <form action="{{route('post.store')}}" method="POST" class="d-flex align-items-start w-100">
+            <form action="{{route('post.store')}}" id="send-post" method="POST" class="d-flex align-items-start w-100">
                 @csrf
             
                 @if(auth()->user()->icon)
@@ -24,7 +24,7 @@
                     </div>
                 @endif
                 <div class="w-100 p-2">
-                    <textarea class="" name="" placeholder="What's Happen?" id="input-post"  rows="2"></textarea>
+                    <textarea class="" name="content" placeholder="What's happening?" id="input-post"  rows="2"></textarea>
                     <hr>
 
                     <div id="buttons" class="w-100 d-flex justify-content-end">
@@ -36,9 +36,13 @@
             </form>
 
         </section>
+        <hr class="mt-0">
     @endauth
 
+    <main id="posts" data-getPostRoute="{{route('post.getPost')}}">
 
+        
+    </main>
 </section>
 
 
