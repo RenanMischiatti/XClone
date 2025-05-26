@@ -21,4 +21,11 @@ class FeedController extends Controller
 
         return response()->json(['message' => 'Post created.'], 200);
     }
+
+    public function getPosts()
+    {
+        $posts = Post::with("user")->orderByDesc("created_at")->Paginate(10);
+
+        return view('components.feed.posts', compact('posts'));
+    }
 }

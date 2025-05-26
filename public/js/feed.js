@@ -14,37 +14,51 @@ $("#send-post").on('submit', function(e) {
         url: $(this).attr('action'),
         method: $(this).attr('method'),
         data: $(this).serialize(),
-        success: function(response) {
-            console.log('Post enviado com sucesso:', response);
+        beforeSend: function() {
+            $("#postBtn").attr("disabled", true).html(`
+                <div class="spinner-border text-dark" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            `);
         },
-        error: function(xhr) {
-            console.error('Erro ao enviar o post:', xhr.responseText);
+        success: function(response) {
+            startPage();
+        },
+        complete: function() {
+            $("#postBtn").attr("disabled", false).html("Post");
+            $(this).reset();
         }
     });
 });
 
+startPage();
+function startPage() {
+    $('#posts').empty();
+    getPosts();
+}
+
 function getPosts(paginate = 1) {
+    
     let route = $('#posts').data("getPostRoute"); 
+    let loading = `
+        <div class="w-100 d-flex justify-content-center mt-3" id="loading">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div> 
+    `;
 
     $.ajax({
         url: route + '?page=' + paginate,
         method: 'GET',
-        success: function(response) {
-            
-            $('#posts').html(''); // Limpa a div antes
-            response.data.forEach(post => {
-                $('#posts').append(`
-                    <div class="post">
-                        <p>${post.conteudo}</p>
-                        <small>Postado por: ${post.user.name}</small>
-                    </div>
-                `);
-            });
-
-            // Atualização de paginação pode ser feita aqui também se necessário
+        beforeSend: function() {
+            $("#posts").append(loading);
         },
-        error: function(xhr) {
-            console.error('Erro ao carregar posts:', xhr.responseText);
+        success: function(response) {
+            $("#posts").append(response);
+        },
+        complete: function() {
+            $("#loading").remove();
         }
     });
 }

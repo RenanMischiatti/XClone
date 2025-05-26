@@ -36,10 +36,10 @@
             </form>
 
         </section>
-        <hr class="mt-0">
+        <hr class="m-0">
     @endauth
 
-    <main id="posts" data-getPostRoute="{{route('post.getPost')}}">
+    <main id="posts" data-get-post-route="{{route('post.getPost')}}">
 
         
     </main>
