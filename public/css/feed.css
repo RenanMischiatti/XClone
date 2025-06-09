@@ -64,6 +64,7 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
     transition: 0.2s ease all;
+    padding: 10px 0px;
 }
 
 .post:hover {
@@ -85,18 +86,55 @@
     font-size: 14px;
 }
 
-#actions span svg {
-    width: 26px;
-    height: 26px;
+#actions svg {
+    width: 15px;
+    height: 15px;
 
     color: #71767b;            
-    vector-effect: non-scaling-stroke;
   }
-  
-  #actions span svg path {
-    fill: currentColor;
-    stroke: currentColor;
-    stroke-width: 1px;     
-    stroke-linecap: round;      
-    stroke-linejoin: round;   
-  }
+
+
+.btn-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: 0.3s ease all;
+    cursor: pointer;
+}
+.bg-hover {
+    position: absolute;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    transition: 0.3s ease all;
+}
+
+.comment:hover .bg-hover {
+    background-color: #1d9bf01a;
+}
+.comment:hover svg {
+    fill: #388fca;
+}
+
+.repost:hover .bg-hover {
+    background-color: #00ba7c1a;
+}
+.repost:hover svg {
+    fill: #00ba7c;
+}
+
+.like:hover .bg-hover {
+    background-color: #f918801a;
+}
+.like:hover svg {
+    fill: #f91880;
+}
+
+.post-label {
+    font-size: 20px;
+}
+
+.btn-back:hover .bg-hover {
+    background-color: #eff3f41a;
+}

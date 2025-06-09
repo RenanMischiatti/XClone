@@ -1,5 +1,5 @@
-<!-- resources/views/home.blade.php -->
-@extends('layouts.base')
+<!-- resources/views/app.blade.php -->
+@extends('base')
 
 @section('title', 'Página Inicial')
 
@@ -10,7 +10,7 @@
             @include('layouts.home.menu')
         </div>
         <div class="col-6 p-0">
-            @include('layouts.home.feed')
+            @yield('sectionMid')
         </div>
         <div class="col-3 border-left-default">
             @include('layouts.home.news')

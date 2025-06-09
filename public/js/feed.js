@@ -62,3 +62,7 @@ function getPosts(paginate = 1) {
         }
     });
 }
+
+function openThread(url) {
+    window.location.href = url;
+}

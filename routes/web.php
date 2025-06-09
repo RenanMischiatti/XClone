@@ -1,18 +1,22 @@
 <?php
 
 use App\Http\Controllers\FeedController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 
 // Home routes 
-Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/', [FeedController::class, 'index'])->name('index');
 
 // Login Rooutes
 Route::post('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/login',    [LoginController::class, 'login'   ])->name('login');
 
+// Public Posts route
+Route::prefix('post')->group(function () {
+    Route::get('/post/GetPosts', [FeedController::class, 'getPosts'])->name('post.getPost');
+    Route::get('/post/{id}',     [FeedController::class, 'showPost'])->name('show.post');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -20,8 +24,4 @@ Route::middleware('auth')->group(function () {
     Route::prefix('post')->group(function () {
         Route::post('/sendPost', [FeedController::class, 'store'])->name('post.store');
     });
-    
-
 });
-
-Route::get('/post/GetPosts', [FeedController::class, 'getPosts'])->name('post.getPost');

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class FeedController extends Controller
 {
+    public function index()
+    {
+        return view('layouts.home.feed');
+    }
+
     public function store(Request $request) 
     {
         $validated = $request->validate([
@@ -27,5 +32,12 @@ class FeedController extends Controller
         $posts = Post::with("user")->orderByDesc("created_at")->Paginate(10);
 
         return view('components.feed.posts', compact('posts'));
+    }
+
+    public function showPost($id)
+    {
+        $post = Post::findOrFail($id);
+
+        return view('components.feed.post', compact('post'));
     }
 }
