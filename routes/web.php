@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     
     Route::prefix('post')->group(function () {
-        Route::post('/sendPost', [FeedController::class, 'store'])->name('post.store');
+        Route::post('/sendPost',       [FeedController::class, 'store'])->name('post.store');
+        Route::post('/create-comment/{id}', [FeedController::class, 'createComment'])->name('post.store.comment');
     });
 });

@@ -20,6 +20,11 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function getTimeAgoAttribute()
     {
         $created = Carbon::parse($this->created_at);
@@ -47,5 +52,12 @@ class Post extends Model
         }
 
         return $created->format('d/m/Y');
+    }
+
+    public function getTwitterFormattedAttribute()
+    {
+        $created = Carbon::parse($this->created_at);
+
+        return $created->format('g:i A · M j, Y');
     }
 }

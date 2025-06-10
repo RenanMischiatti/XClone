@@ -1,0 +1,21 @@
+.name {
+    font-size: 14px!important;
+}
+
+.username {
+    font-size: 13px!important;
+}
+
+#content {
+    font-size: 17px;
+}
+
+#actions svg {
+    width: 18px;
+    height: 18px;
+}
+
+.post:hover {
+    background-color: #000000!important;
+    cursor: auto;
+}

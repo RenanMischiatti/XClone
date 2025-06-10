@@ -22,6 +22,9 @@ $("#send-post").on('submit', function(e) {
             `);
         },
         success: function(response) {
+            if (response.type === 'comment') {
+                reloadComments(response.comment.post_id)
+            }
             startPage();
         },
         complete: function() {
