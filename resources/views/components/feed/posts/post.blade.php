@@ -56,32 +56,34 @@
                     </span>
                 </section>
                 <hr>
-                <form action="{{route('post.store.comment', [$post->id])}}" id="send-post" method="POST" class="d-flex align-items-start w-100">
-                    @csrf
-                
-                    @if(auth()->user()->icon)
-                        <img src="{{ asset('storage/' . auth()->user()->icon) }}" alt="User Icon" class="icon-class">
-                    @else 
-                        <div class="user-icon-placeholder">
-                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                @auth
+                    <form action="{{route('post.store.comment', [$post->id])}}" id="send-post" method="POST" class="d-flex align-items-start w-100">
+                        @csrf
+                    
+                        @if(auth()->user()->icon)
+                            <img src="{{ asset('storage/' . auth()->user()->icon) }}" alt="User Icon" class="icon-class">
+                        @else 
+                            <div class="user-icon-placeholder">
+                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                            </div>
+                        @endif
+                        <div class="w-100 d-flex  align-items-center ps-2">
+                            <textarea class="w-100 mb-3" name="content" placeholder="What's happening?" id="input-post"  rows="3"></textarea>
+                            
+        
+                            <div id="buttons" class="w-100 d-flex justify-content-end">
+                                <button disabled class="btn btn-primary px-5 py-2" id="postBtn">
+                                    Post
+                                </button>
+                            </div>
                         </div>
-                    @endif
-                    <div class="w-100 d-flex  align-items-center ps-2">
-                        <textarea class="w-100 mb-3" name="content" placeholder="What's happening?" id="input-post"  rows="3"></textarea>
-                        
-    
-                        <div id="buttons" class="w-100 d-flex justify-content-end">
-                            <button disabled class="btn btn-primary px-5 py-2" id="postBtn">
-                                Post
-                            </button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                @endauth
             </section>
 
         </div>
         <hr>
-        <section id="comments">
+        <section id="comments" data-route-get-post="{{ route('comments.getComments', [$post->id]) }}">
             @include('components.feed.posts.comments.comments', ['comments' => $post->comments])
         </section>
     </div>

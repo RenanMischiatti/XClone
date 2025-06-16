@@ -2,6 +2,21 @@ $('#input-post').on('focus', function () {
         $(this).parent().addClass('flex-column');
 });
 
-function reloadComments(post_id) {
-    alert(post_id)
+function loadComments(post_id) {
+
+    let route = $('#comments').data('route-get-post')
+
+    $.ajax({
+        url: route,
+        method: 'GET',
+        beforeSend: function() {
+            $("#comments").append(loading);
+        },
+        success: function(response) {
+            $("#comments").append(response);
+        },
+        complete: function() {
+            $("#loading").remove();
+        }
+    });
 }

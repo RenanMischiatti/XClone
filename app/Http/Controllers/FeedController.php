@@ -54,14 +54,14 @@ class FeedController extends Controller
         ]);
 
         return response()->json([
-            'status' => 'success',
-            'type' => 'comment',
+            'status'  => 'success',
+            'type'    => 'comment',
             'message' => 'Comment created successfully.',
-            'comments' => $this->reloadComments($id),
+            'comment' => $id,
         ]);
     }
 
-    protected function reloadComments($post_id)
+    public function getComments($post_id)
     {
         $comments = Comment::wherePostId($post_id)->whereNull('parent_comment_id')->get();
 

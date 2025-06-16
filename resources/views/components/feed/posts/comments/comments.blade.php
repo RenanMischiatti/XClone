@@ -6,7 +6,7 @@
     <div class="post px-4 d-flex" onclick="openThread()">
         
         <section>
-            @if($user->icon)
+                @if($user->icon)
                     <img src="{{ asset('storage/' . $user->icon) }}" alt="User Icon" class="icon-class">
                 @else 
                     <div class="user-icon-placeholder">

@@ -1,3 +1,11 @@
+var loading = `
+    <div class="w-100 d-flex justify-content-center mt-3" id="loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div> 
+`;
+
 $('#input-post').on('input', function () {
     let hasText = $(this).val().trim().length > 0;
     $("#postBtn").attr('disabled', !hasText);
@@ -9,11 +17,12 @@ $('#input-post').on('input', function () {
 
 $("#send-post").on('submit', function(e) {
     e.preventDefault();
+    const form = this;
 
     $.ajax({
-        url: $(this).attr('action'),
-        method: $(this).attr('method'),
-        data: $(this).serialize(),
+        url: $(form).attr('action'),
+        method: $(form).attr('method'),
+        data: $(form).serialize(),
         beforeSend: function() {
             $("#postBtn").attr("disabled", true).html(`
                 <div class="spinner-border text-dark" role="status">
@@ -23,13 +32,14 @@ $("#send-post").on('submit', function(e) {
         },
         success: function(response) {
             if (response.type === 'comment') {
-                reloadComments(response.comment.post_id)
+                loadComments(response.comments)
+                return;
             }
             startPage();
         },
         complete: function() {
             $("#postBtn").attr("disabled", false).html("Post");
-            $(this).reset();
+            form.reset();
         }
     });
 });
@@ -43,14 +53,6 @@ function startPage() {
 function getPosts(paginate = 1) {
     
     let route = $('#posts').data("getPostRoute"); 
-    let loading = `
-        <div class="w-100 d-flex justify-content-center mt-3" id="loading">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        </div> 
-    `;
-
     $.ajax({
         url: route + '?page=' + paginate,
         method: 'GET',

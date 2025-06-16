@@ -14,8 +14,12 @@ Route::post('/login',    [LoginController::class, 'login'   ])->name('login');
 
 // Public Posts route
 Route::prefix('post')->group(function () {
-    Route::get('/post/GetPosts', [FeedController::class, 'getPosts'])->name('post.getPost');
-    Route::get('/post/{id}',     [FeedController::class, 'showPost'])->name('show.post');
+    Route::get('/GetPosts', [FeedController::class, 'getPosts'])->name('post.getPost');
+    Route::get('/{id}',     [FeedController::class, 'showPost'])->name('show.post');
+});
+
+Route::prefix('comments')->group(function () {
+    Route::get('/{post_id}/get-comments', [FeedController::class, 'getComments'])->name('comments.getComments');
 });
 
 Route::middleware('auth')->group(function () {
@@ -25,4 +29,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/sendPost',       [FeedController::class, 'store'])->name('post.store');
         Route::post('/create-comment/{id}', [FeedController::class, 'createComment'])->name('post.store.comment');
     });
+
+    
 });
