@@ -10,6 +10,7 @@ function loadComments(post_id) {
         url: route,
         method: 'GET',
         beforeSend: function() {
+            $("#comments").empty();
             $("#comments").append(loading);
         },
         success: function(response) {

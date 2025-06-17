@@ -17,8 +17,6 @@ class FeedController extends Controller
 
     public function store(ContentRequest $request) 
     {
-
-
         Post::create([
             'content' => $request->content,
             'user_id'  => auth()->id(),
@@ -29,7 +27,14 @@ class FeedController extends Controller
 
     public function getPosts()
     {
-        $posts = Post::with("user")->orderByDesc("created_at")->Paginate(10);
+        $posts = Post::with("user")
+        ->orderByDesc("created_at")
+        ->where(function($query) {
+            $query->whereNull('parent_id')
+                  ->whereNull('reply_id');
+        })
+        ->withCount('comments')
+        ->Paginate(10);
 
         return view('components.feed.posts.posts', compact('posts'));
     }
@@ -37,19 +42,21 @@ class FeedController extends Controller
     public function showPost($id)
     {
         $post = Post::with(
-            ['comments' => fn($query) => $query->whereNull('parent_comment_id')]
+            ['comments' => fn($query) => $query->where('parent_id', $id)->orderBy('id', 'DESC')]
         )->findOrFail($id);
 
-        return view('components.feed.posts.post', compact('post'));
+        $urlPrevious = $post->isOriginalPost() ? route('index') : route('show.post', ['id' => $post->parent_id]);
+
+        return view('components.feed.posts.post', compact('post', 'urlPrevious'));
     }
 
     public function createComment($id, ContentRequest $request)
     {       
         $post = Post::findOrFail($id);
 
-        $comment = Comment::create([
+        $comment = Post::create([
             'user_id' => auth()->id(),
-            'post_id' => $id,
+            'parent_id' => $id,
             'content' => $request->content
         ]);
 
@@ -61,9 +68,9 @@ class FeedController extends Controller
         ]);
     }
 
-    public function getComments($post_id)
+    public function getThread($post_id)
     {
-        $comments = Comment::wherePostId($post_id)->whereNull('parent_comment_id')->get();
+        $comments = Post::whereParentId($post_id)->get();
 
         return view('components.feed.posts.comments.comments', compact('comments'));
     }

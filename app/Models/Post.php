@@ -11,8 +11,10 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'content',
         'user_id',
+        'parent_id',
+        'replay_id',
+        'content',
     ];
 
     public function user()
@@ -22,7 +24,7 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Post::class, 'parent_id');
     }
 
     public function getTimeAgoAttribute()
@@ -59,5 +61,10 @@ class Post extends Model
         $created = Carbon::parse($this->created_at);
 
         return $created->format('g:i A · M j, Y');
+    }
+
+    public function isOriginalPost()
+    {
+        return is_null($this->parent_id);
     }
 }

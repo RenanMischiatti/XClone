@@ -14,8 +14,3 @@
     width: 18px;
     height: 18px;
 }
-
-.post:hover {
-    background-color: #000000!important;
-    cursor: auto;
-}

@@ -19,7 +19,7 @@ Route::prefix('post')->group(function () {
 });
 
 Route::prefix('comments')->group(function () {
-    Route::get('/{post_id}/get-comments', [FeedController::class, 'getComments'])->name('comments.getComments');
+    Route::get('/{post_id}/get-comments', [FeedController::class, 'getThread'])->name('comments.getThread');
 });
 
 Route::middleware('auth')->group(function () {
