@@ -92,12 +92,12 @@
     font-size: 12px;
 }
 
-#actions svg {
+.actions svg {
     width: 15px;
     height: 15px;
 
     color: #71767b;            
-  }
+}
 
 
 .btn-action {
