@@ -47,7 +47,7 @@ class FeedController extends Controller
 
         $urlPrevious = $post->isOriginalPost() ? route('index') : route('show.post', ['id' => $post->parent_id]);
 
-        return view('components.feed.posts.post', compact('post', 'urlPrevious'));
+        return view('components.feed.posts.show-post', compact('post', 'urlPrevious'));
     }
 
     public function createComment($id, ContentRequest $request)
