@@ -144,3 +144,38 @@
 .btn-back:hover .bg-hover {
     background-color: #eff3f41a;
 }
+
+#modal-repost .content {
+    border: 1px solid #2f3336;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+#modal-repost .content #send-post,
+#modal-repost .content .user-icon-placeholder {
+    width: 24px;
+    height: 24px;
+    font-size: 8px;
+    min-width:  auto;
+}
+
+#modal-repost .btn {
+    background-color: #eff3f4;
+    border-radius: 32px;
+    font-weight: bolder;
+    padding: 5px 20px;
+}
+
+.post-reply {
+    margin-top: 10px;
+    border: 1px solid #53647165;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.post-reply img, .post-reply .user-icon-placeholder {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    min-width: auto;
+}

@@ -44,6 +44,11 @@ $("#send-post").on('submit', function(e) {
     });
 });
 
+$('#modal-repost').on('submit', function (e) {
+    e.preventDefault();
+    repost('modal-repost', null); 
+});
+
 startPage();
 function startPage() {
     $('#posts').empty();
@@ -70,4 +75,55 @@ function getPosts(paginate = 1) {
 
 function openThread(url) {
     window.location.href = url;
+}
+
+function repost(formId, post_id = null) {
+    const form = document.getElementById(formId);
+    const formData = new FormData(form);
+
+    if (post_id !== null) {
+        formData.append('post_id', post_id);
+    }
+
+    $.ajax({
+        url: form.action,
+        method: form.method,
+        data: formData,
+        processData: false, 
+        contentType: false, 
+        success: function(response) {
+            $("#modal-repost").modal('hide')
+            window.location.href = '/';
+        },
+        error: function(xhr) {
+            console.error('Erro no repost:', xhr.responseText);
+        }
+    });
+}
+
+
+
+
+function openModalToRepost(element, post_id) {
+    let $postContent = $(element).closest('.post').clone();
+
+    let html_reply = `
+        <div class="d-flex flex-column">
+            <div class="d-flex">
+                <strong class="area-icon me-2">${$postContent.find('.area-icon').html()}</strong>
+                <span class="name">${$postContent.find('.name').html()}</span>
+                <span class="username text-muted ms-2" style="color: #71767b">${$postContent.find('.username').html()}</span>
+                <div class="time" style="color: #71767b">${$postContent.find('.time').html()}</div>
+                <input type="hidden" name="post_id" value="${post_id}">
+            </div>
+
+            <div class="parent-content mt-3">
+                ${$postContent.find('.content').html()}
+            </div>
+        </div>
+    `;
+
+
+    $('#modal-repost .modal-body .content').html(html_reply);
+    $('#modal-repost').modal('show');
 }

@@ -13,13 +13,18 @@ class Post extends Model
     protected $fillable = [
         'user_id',
         'parent_id',
-        'replay_id',
+        'reply_id',
         'content',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function reply_post()
+    {
+        return $this->belongsTo(Post::class, 'reply_id', 'id');
     }
 
     public function comments()

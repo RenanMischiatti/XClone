@@ -35,11 +35,18 @@
                     </div>
                 </div>
 
-                <main id="content" class="mb-3">
+                <main id="content">
                     {{$post->content}}
                 </main>
 
-                <div class="time">{{$post->TwitterFormatted }}</div>
+                @if ($post->reply_id)
+                    <section class="post-reply my-3">
+                        {{-- post-reply.blade.php --}}
+                        <x-post :post="$post->reply_post" :reply="true" />
+                    </section>
+                @endif
+
+                <div class="time mt-2">{{$post->TwitterFormatted }}</div>
                 <hr>
                 <x-actions-post :post="$post"/>
                 <hr>

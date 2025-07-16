@@ -21,6 +21,6 @@ class ActionsPost extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.actions-post');
+        return view('components.feed.posts.partials.actions-post');
     }
 }

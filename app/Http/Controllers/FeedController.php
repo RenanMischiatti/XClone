@@ -27,11 +27,10 @@ class FeedController extends Controller
 
     public function getPosts()
     {
-        $posts = Post::with("user")
+        $posts = Post::with(["user", 'reply_post'])
         ->orderByDesc("created_at")
         ->where(function($query) {
-            $query->whereNull('parent_id')
-                  ->whereNull('reply_id');
+            $query->whereNull('parent_id');
         })
         ->withCount('comments')
         ->Paginate(10);
@@ -75,4 +74,15 @@ class FeedController extends Controller
         return view('components.feed.posts.comments.comments', compact('comments'));
     }
 
+
+    public function retweetPost(Request $request)
+    {
+        $parentPost = Post::findOrFail($request->post_id);
+
+        $retweeted = Post::create([
+            'user_id'  => auth()->id(),
+            'reply_id' => $parentPost->id,
+            'content'  => $request->content
+        ]);
+    }
 }

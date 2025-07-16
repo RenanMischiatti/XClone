@@ -17,6 +17,8 @@
         </div>    
     </div>
 </main>
+
+@includeWhen(auth()->check(), 'components.feed.posts.partials.modal-repost')
 @endsection
 
 @push('styles')

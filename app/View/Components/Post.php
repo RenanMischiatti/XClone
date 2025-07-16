@@ -8,19 +8,21 @@ use Illuminate\Contracts\View\View;
 
 class Post extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $post;
+    public $reply;
+
+    public function __construct($post = null, $reply = false)
     {
-        //
+        $this->post = $post;
+        $this->reply = $reply;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
+        if ($this->reply) {
+            return view('components.post-reply');
+        }
+        
         return view('components.post');
     }
 }

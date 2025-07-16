@@ -6,7 +6,7 @@
 
 <div class="post px-4 pt-3 pb-2 d-flex" onclick="openThread('{{ route('show.post', [$post->id]) }}')">
     
-    <section>
+    <section class="area-icon">
             @if($user->icon)
                 <img src="{{ asset('storage/' . $user->icon) }}" alt="User Icon" class="icon-class">
             @else 
@@ -22,9 +22,17 @@
             <div class="time"><strong class="mx-2">·</strong>{{$post->time_ago }}</div>
         </div>
 
-        <main>
+        <main class="content">
             {{$post->content}}
         </main>
+
+        @if ($post->reply_id)
+            
+            <section class="post-reply">
+                {{-- post-reply.blade.php --}}
+                <x-post :post="$post->reply_post" :reply="true" />
+            </section>
+        @endif
 
         <x-actions-post :post="$post"/>
     </section>
